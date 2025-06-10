@@ -1,0 +1,90 @@
+What is Terraform?
+Terraform is an open-source Infrastructure as Code (IaC) tool developed by HashiCorp. It allows you to define and provision infrastructure using a high-level configuration language known as HCL (HashiCorp Configuration Language).
+
+Instead of manually creating cloud resources (servers, databases, networking, etc.), Terraform allows you to write code to automate these tasks across multiple cloud providers.
+
+Key Features:
+IaC (Infrastructure as Code): Manage infrastructure using version-controlled code.
+
+Multi-cloud: Supports AWS, Azure, GCP, Kubernetes, etc.
+
+Declarative Language: Describe what infrastructure you want, not how to create it.
+
+Execution Plan: Terraform shows what it will change before making changes.
+
+State Management: Tracks resource state for consistency and updates.
+
+Modular and Reusable: Break infrastructure into modules.
+
+Terraform vs Other IaC Tools:
+Feature	Terraform	CloudFormation	Ansible
+Language	HCL	JSON/YAML	YAML + Python
+Focus	Provisioning	AWS provisioning	Configuration
+Multi-cloud	✅ Yes	❌ AWS only	✅ Yes
+Agentless	✅ Yes	✅ Yes	✅ Yes
+Mutable/Immutable	Immutable	Mutable	Mutable
+
+🏗️ 2. Terraform Architecture
+Terraform operates using a well-defined workflow and architecture composed of the following core components:
+
+2.1 Providers
+Responsible for interacting with cloud platforms or services.
+
+Each provider (e.g., AWS, GCP, Azure, Kubernetes) has its own plugin.
+
+Defined in .tf files like:
+
+hcl
+Copy
+Edit
+provider "aws" {
+  region = "us-west-2"
+}
+2.2 Resources
+The most important building block in Terraform.
+
+Represents a specific infrastructure object (e.g., EC2 instance, S3 bucket, etc.)
+
+Example:
+
+h
+Copy
+Edit
+resource "aws_instance" "my_ec2" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+}
+2.3 Modules
+A way to organize and reuse Terraform code.
+
+Group resources and logic together into reusable components.
+
+Can be local or remote (e.g., from Terraform Registry).
+
+2.4 State File
+Terraform saves the current state of the infrastructure in a file named terraform.tfstate.
+
+This file is critical for:
+
+Tracking resource metadata
+
+Planning future changes
+
+Supports remote backends (e.g., S3, Terraform Cloud) for team collaboration.
+
+2.5 Execution Plan
+terraform plan shows what Terraform intends to do.
+
+Prevents unexpected changes by allowing you to review actions before applying them.
+
+2.6 Terraform Workflow
+Write: Write configuration in .tf files
+
+Initialize: terraform init downloads plugins
+
+Plan: terraform plan shows what will change
+
+Apply: terraform apply makes the changes
+
+Destroy (optional): terraform destroy tears it all down
+
